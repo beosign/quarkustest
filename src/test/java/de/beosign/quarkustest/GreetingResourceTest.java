@@ -42,7 +42,6 @@ public class GreetingResourceTest {
                 .then()
                 .statusCode(200);
 
-        System.out.println("DEL2? " + greetingService.find(4711));
     }
 
     @Test
