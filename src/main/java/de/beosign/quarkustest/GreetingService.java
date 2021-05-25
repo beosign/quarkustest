@@ -1,5 +1,7 @@
 package de.beosign.quarkustest;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -47,5 +49,9 @@ public class GreetingService {
         em.remove(greeting);
         log.debug("Greeting found with id {} to delete", id);
         return true;
+    }
+
+    public List<Greeting> findAll() {
+        return em.createQuery("SELECT g from Greeting g", Greeting.class).getResultList();
     }
 }

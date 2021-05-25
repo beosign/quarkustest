@@ -1,8 +1,6 @@
 package de.beosign.quarkustest;
 
-import io.quarkus.test.junit.NativeImageTest;
-
-@NativeImageTest
+//@NativeImageTest => cannot be used with @Inject
 public class NativeGreetingResourceIT extends GreetingResourceTest {
 
     // Execute the same tests but in native mode.
