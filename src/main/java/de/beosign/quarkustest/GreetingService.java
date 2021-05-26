@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
+@Transactional
 public class GreetingService {
     private static final Logger log = LoggerFactory.getLogger(GreetingService.class);
 
@@ -23,12 +24,10 @@ public class GreetingService {
         log.debug("Greeting Service created");
     }
 
-    @Transactional
     public Greeting find(int id) {
         return em.find(Greeting.class, id);
     }
 
-    @Transactional
     public Greeting store(Greeting greeting) {
         if (greeting.getId() == -1) {
             em.persist(greeting);
@@ -38,7 +37,6 @@ public class GreetingService {
         return greeting;
     }
 
-    @Transactional
     public boolean delete(int id) {
         Greeting greeting = find(id);
         if (greeting == null) {
