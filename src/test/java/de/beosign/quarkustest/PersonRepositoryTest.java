@@ -3,6 +3,8 @@ package de.beosign.quarkustest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
 
 import java.util.Collections;
 import java.util.List;
@@ -71,6 +73,18 @@ public class PersonRepositoryTest {
     public void test_04b_checkUnchanged() {
         Person homer = personRepository.findByFirstName("Homer");
         assertThat(homer.getAge(), is(42)); // changes in test_04a have been rolled back!
+    }
+
+    @Test
+    @TestTransaction
+    public void test_04c_updatePerson() {
+        Person homer = personRepository.findByFirstName("Homer");
+
+        homer.setFirstName("Homer J.");
+        assertThat(personRepository.update(homer).getFirstName(), is("Homer J."));
+
+        homer = personRepository.findByFirstName("Homer J.");
+        assertThat(homer.getAge(), is(not(nullValue())));
     }
 
     @Test

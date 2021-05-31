@@ -32,4 +32,9 @@ public class PersonRepository implements PanacheRepository<Person> {
         return update("age = ?1 where id = ?2", newAge, id);
     }
 
+    @Transactional
+    public Person update(Person person) {
+        return getEntityManager(Person.class).merge(person);
+    }
+
 }
